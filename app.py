@@ -32,17 +32,17 @@ COLORS = {
 }
 
 LEVELS = [
-    {"fps": 40, "enemies": 2, "win": 60},
-    {"fps": 50, "enemies": 2, "win": 65},
-    {"fps": 60, "enemies": 2, "win": 60},
-    {"fps": 50, "enemies": 3, "win": 60},
-    {"fps": 50, "enemies": 3, "win": 70},
-    {"fps": 60, "enemies": 3, "win": 70},
-    {"fps": 60, "enemies": 3, "win": 80},
-    {"fps": 60, "enemies": 4, "win": 65},
-    {"fps": 60, "enemies": 4, "win": 75},
-    {"fps": 70, "enemies": 4, "win": 60},
-    {"fps": 70, "enemies": 4, "win": 70},
+    {"fps": 40, "enemies": 2, "win": 65},
+    {"fps": 41, "enemies": 2, "win": 70},
+    {"fps": 41, "enemies": 2, "win": 70},
+    {"fps": 42, "enemies": 3, "win": 65},
+    {"fps": 42, "enemies": 3, "win": 70},
+    {"fps": 43, "enemies": 3, "win": 75},
+    {"fps": 43, "enemies": 4, "win": 70},
+    {"fps": 44, "enemies": 4, "win": 75},
+    {"fps": 44, "enemies": 4, "win": 80},
+    {"fps": 46, "enemies": 5, "win": 75},
+    {"fps": 48, "enemies": 5, "win": 80},
 ]
 
 # ----------------------------------------
@@ -121,7 +121,8 @@ class Player:
 
         # 🟨 Move into empty area → draw trail
         if next_cell == EMPTY:
-            field[self.y][self.x] = TRAIL
+            is_filled = field[self.y][self.x] == FILLED
+            field[self.y][self.x] = TRAIL if not is_filled else FILLED
             self.x = nx
             self.y = ny
             self.drawing = True
