@@ -1,12 +1,3 @@
-STATE_PLAYING = 0
-STATE_DEAD = 1
-STATE_WIN = 2
-STATE_MENU = 3
-STATE_LIFE_LOST = 4
-STATE_PAUSED = 5
-
-WIN_PERCENT = 80
-
 CELL_SIZE = 10
 GRID_WIDTH = 150
 GRID_HEIGHT = 80
@@ -14,7 +5,6 @@ GRID_HEIGHT = 80
 WIDTH = GRID_WIDTH * CELL_SIZE
 HEIGHT = GRID_HEIGHT * CELL_SIZE
 
-FPS = 50
 
 EMPTY = 0
 FILLED = 1
@@ -35,7 +25,7 @@ LEVELS_DEV = [
   {"fps": 41, "enemies": 2, "win": 70},
 ]
 
-LEVELS = [
+LEVELS_PROD = [
   "fake record - level 0",
   {"fps": 40, "enemies": 2, "win": 65},
   {"fps": 41, "enemies": 2, "win": 70},
@@ -48,4 +38,14 @@ LEVELS = [
   {"fps": 44, "enemies": 4, "win": 80},
   {"fps": 46, "enemies": 5, "win": 75},
   {"fps": 48, "enemies": 5, "win": 80},
+  {"fps": 48, "enemies": 6, "win": 75},
+  {"fps": 48, "enemies": 6, "win": 80},
+  {"fps": 48, "enemies": 7, "win": 80},
+  {"fps": 49, "enemies": 7, "win": 83},
+  {"fps": 49, "enemies": 8, "win": 83},
+  {"fps": 50, "enemies": 8, "win": 83},
+  {"fps": 50, "enemies": 9, "win": 83},
+  {"fps": 50, "enemies": 10, "win": 83},
 ]
+
+LEVELS = LEVELS_DEV

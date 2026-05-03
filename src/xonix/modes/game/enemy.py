@@ -1,6 +1,8 @@
 import random
 
-from config import GRID_WIDTH, GRID_HEIGHT, FILLED
+import pygame
+
+from config import COLORS, GRID_WIDTH, GRID_HEIGHT, FILLED
 
 
 class Enemy:
@@ -9,6 +11,17 @@ class Enemy:
         self.y = random.randint(2, GRID_HEIGHT - 3)
         self.dx = random.choice([-1, 1])
         self.dy = random.choice([-1, 1])
+
+    def draw(self, screen, cell_size):
+        pygame.draw.circle(
+            screen,
+            COLORS["enemy"],
+            (
+                self.x * cell_size + cell_size // 2,
+                self.y * cell_size + cell_size // 2,
+            ),
+            cell_size // 2,
+        )
 
     def move(self, field, tick_sound=None):
         reflected = False

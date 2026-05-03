@@ -6,9 +6,9 @@ from enum import Enum
 
 class ResourceLoader:
   def __init__(self):
-    self.sounds_dir = Path(__file__).parent / "sounds"
+    self.sounds_dir = Path(__file__).parent / "assets" / "sounds"
 
-  def load_sound(self, name: str, exts=(".wav", ".mp3")):
+  def load_sound(self, name: str, exts=(".wav",)):
     """Try to load `name` with common extensions from the sounds folder.
 
     Returns a `pygame.mixer.Sound` instance or None if loading failed.

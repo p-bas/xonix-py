@@ -1,4 +1,6 @@
-from config import GRID_WIDTH, GRID_HEIGHT, FILLED, TRAIL, EMPTY
+import pygame
+
+from config import COLORS, GRID_WIDTH, GRID_HEIGHT, FILLED, TRAIL, EMPTY
 from resources import AudioManager
 
 
@@ -12,6 +14,13 @@ class Player:
         self.y = GRID_HEIGHT - 1
         self.drawing = False
         self.move_clear()
+
+    def draw(self, screen, cell_size):
+        pygame.draw.rect(
+            screen,
+            COLORS["player"],
+            (self.x * cell_size, self.y * cell_size, cell_size, cell_size),
+        )
 
     def move_clear(self):
         self.dx = 0
@@ -34,7 +43,7 @@ class Player:
         self.dx = 1
         self.update(field)
 
-    def update(self, field, sound=None):
+    def update(self, field):
         if self.dx == 0 and self.dy == 0:
             self.result = None
             return
