@@ -21,8 +21,8 @@ COLORS = {
 
 LEVELS_DEV = [
   "fake level: 0",
-  {"fps": 40, "enemies": 2, "win": 65},
-  {"fps": 41, "enemies": 2, "win": 70},
+  {"fps": 30, "enemies": 1, "win": 1},
+  {"fps": 31, "enemies": 2, "win": 1},
 ]
 
 LEVELS_PROD = [
@@ -48,4 +48,4 @@ LEVELS_PROD = [
   {"fps": 50, "enemies": 10, "win": 83},
 ]
 
-LEVELS = LEVELS_DEV
+LEVELS = LEVELS_PROD

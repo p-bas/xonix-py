@@ -4,6 +4,7 @@ from config import LEVELS, TRAIL
 from resources import Sound
 from .overlay_level_passed import OverlayLevelPassed
 from .overlay_level_failed import OverlayLevelFailed
+from .overlay_you_won import OverlayYouWon
 from .overlay_game_paused import OverlayGamePaused
 from .game_stat_hud import GameStatHud
 from .battle_field import BattleField
@@ -16,7 +17,6 @@ STARTING_LIFES_LEFT = 3
 class GameMode:
     def __init__(self, sound_player, event_bus):
         self.sound_player = sound_player
-        self.tick_sound = sound_player.get(Sound.TICK)
         self.game_stat_hud = GameStatHud()
         self.reset(level=1)
 
@@ -29,10 +29,8 @@ class GameMode:
         self.level = level
         self.field = BattleField()
         self.player = Player(self.sound_player)
-        self.enemies = [Enemy() for _ in range(LEVELS[level]["enemies"])]
+        self.enemies = [Enemy(self.sound_player) for _ in range(LEVELS[level]["enemies"])]
         self.lives_left = STARTING_LIFES_LEFT
-        self.life_lost_selected = 0
-        self.pause_selected = 0
         self.overlay = None
 
     def tick(self, clock):
@@ -75,12 +73,15 @@ class GameMode:
             self.field.flood_fill(self.enemies)
             coverage = self.field.calculate_coverage()
             if coverage >= LEVELS[self.level]["win"]:
-                self.overlay = OverlayLevelPassed(self.event_bus, self.level)
+                if (self.level + 1) < len(LEVELS):
+                    self.overlay = OverlayLevelPassed(self.event_bus, self.level)
+                else:
+                    self.overlay = OverlayYouWon(self.event_bus)
                 self.sound_player.play(Sound.WIN)
                 return
 
         for enemy in self.enemies:
-            enemy.move(self.field, self.tick_sound)
+            enemy.move(self.field)
             if player.drawing:
                 colide_with_player = (enemy.x == player.x and enemy.y == player.y)
                 colide_with_trail = (self.field[enemy.y][enemy.x] == TRAIL)

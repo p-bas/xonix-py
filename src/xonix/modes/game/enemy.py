@@ -3,10 +3,12 @@ import random
 import pygame
 
 from config import COLORS, GRID_WIDTH, GRID_HEIGHT, FILLED
+from resources import Sound
 
 
 class Enemy:
-    def __init__(self):
+    def __init__(self, sound_player):
+        self.sound_player = sound_player
         self.x = random.randint(2, GRID_WIDTH - 3)
         self.y = random.randint(2, GRID_HEIGHT - 3)
         self.dx = random.choice([-1, 1])
@@ -23,7 +25,7 @@ class Enemy:
             cell_size // 2,
         )
 
-    def move(self, field, tick_sound=None):
+    def move(self, field):
         reflected = False
         hit_x = field[self.y][self.x + self.dx] == FILLED
         hit_y = field[self.y + self.dy][self.x] == FILLED
@@ -42,8 +44,8 @@ class Enemy:
                 self.dy *= -1
                 reflected = True
 
-        if reflected and tick_sound:
-            tick_sound.play()
+        if reflected:
+            self.sound_player.play(Sound.TICK)
 
         self.x += self.dx
         self.y += self.dy

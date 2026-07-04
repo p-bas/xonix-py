@@ -1,6 +1,5 @@
 import pygame
 
-from config import LEVELS
 from common.xonix_events import XonixEvent
 
 class OverlayLevelPassed:
@@ -21,10 +20,7 @@ class OverlayLevelPassed:
     def draw(self, screen):
         width, height = screen.get_size()
 
-        if (self.level + 1) < len(LEVELS):
-            text = f"LEVEL {self.level} COMPLETE"
-        else:
-            text = "YOU COMPLETED ALL LEVELS!"
+        text = f"LEVEL {self.level} COMPLETE"
 
         overlay = pygame.Surface((width, height))
         overlay.set_alpha(180)

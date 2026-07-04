@@ -1,11 +1,15 @@
 import pygame
+from pathlib import Path
 
 from common.xonix_events import XonixEvent
+
+_IMAGES_DIR = Path(__file__).parent.parent.parent / "assets" / "images"
 
 class OverlayLevelFailed:
     def __init__(self, event_bus):
         self.event_bus = event_bus
         self.selected_option = 0
+        self._fail_image = pygame.image.load(str(_IMAGES_DIR / "fail.png")).convert_alpha()
 
     def tick(self, clock):
         clock.tick(5)
@@ -33,12 +37,12 @@ class OverlayLevelFailed:
         overlay.fill((0, 0, 0))
         screen.blit(overlay, (0, 0))
 
-        title_font = pygame.font.SysFont(None, 72)
         menu_font = pygame.font.SysFont(None, 40)
         hint_font = pygame.font.SysFont(None, 28)
 
-        title_surf = title_font.render("LEVEL FAILED", True, (255, 50, 50))
-        screen.blit(title_surf, title_surf.get_rect(center=(width // 2, height // 2 - 90)))
+        img_size = 144
+        fail_img = pygame.transform.smoothscale(self._fail_image, (img_size, img_size))
+        screen.blit(fail_img, fail_img.get_rect(center=(width // 2, height // 2 - 140)))
 
         options = ["Retry", "Main Menu", "Exit Game"]
         for i, option in enumerate(options):
